@@ -9,11 +9,6 @@
         if ($tam == 'trangchu') {
             include("pages/trangchu.php");
         } elseif ($tam == 'danhmucsanpham') {
-
-            // DEBUG
-            file_put_contents("./debugURI.txt", $tam);
-            // DEBUG
-
             include("pages/danhmuc.php");
             // }elseif($tam=='toyensao'){
             //     include("pages/toyensao.php");

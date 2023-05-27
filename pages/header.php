@@ -24,19 +24,15 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
         <div class="drop_menu">
             <!-- <li><a href="index.php?quanly=trangchu">TRANG CHỦ</a></li> -->
             <?php
-            while ($row_danhmuc = mysqli_fetch_array($query_danhmuc)) {
-                ?>
-                <li>
-                    <a style="color:rgb(186, 41, 41); font-size:15px;"
-                        href="index.php?quanly=danhmucsanpham&id=<?php echo $row_danhmuc['id_dm'] ?>">
-                        <?php echo $row_danhmuc['ten'] ?>
-                    </a>
-                </li>
-                <?php
+            while($row_danhmuc=mysqli_fetch_array($query_danhmuc)){
+            ?>
+            <li><a style="color:rgb(186, 41, 41); font-size:18px;  font-weight: bold;" 
+            href="index.php?quanly=danhmucsanpham&id=<?php echo $row_danhmuc['id_dm']?>"><?php echo $row_danhmuc['ten']?></a>
+            </li>
+            <?php
             }
             ?>
-            <li><a href="index.php?quanly=vechungtoi" style="color:rgb(186, 41, 41); font-size:15px;">Về chúng tôi</a>
-            </li>
+            <li><a href="index.php?quanly=vechungtoi" style="color:rgb(186, 41, 41); font-size:18px;  font-weight: bold;" >Về chúng tôi</a></li>
         </div>
     </div>
 

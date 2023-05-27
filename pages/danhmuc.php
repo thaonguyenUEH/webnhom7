@@ -7,45 +7,20 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script>
+    // Hàm thực thi khi chọn kiểu sắp xếp giá
+  // Gửi request về backend để truy vấn sản phẩm theo kiểu sắp xếp và id được qui định
     function performSort(id) {
       const xhttp = new XMLHttpRequest();
       xhttp.onload = function () {
-
-        //  <ul class="container product_list">
-        // <?php
-        //   // $query_pro = array(
-        //   //   "<script type=\"text/javascript\">
-        //   //     this.responseText
-        //   //   </script>"
-        //   // );
-        //   // // echo json_encode($query_pro);
-        //   // render(array($query_pro));
-        // ?>
-        // </ul>
-
+        // In kết quả nhận được từ back-end
+        // console.log(this.responseText);
       }
 
       var e = document.getElementById("sort_order");
       var value = e.value;
-      console.log(value);
-
       let url = "index.php?quanly=danhmucsanpham&id=".concat(id, "&sort_order=".concat(value));
-      console.log(url);
       xhttp.open("GET", url, true);
       xhttp.send();
-
-      //       <?php
-      //   $sql_pro = "SELECT * FROM tbl_sanpham 
-      //   WHERE tbl_sanpham.id_dm=\"<script type=\"text/javascript\">id</script>\" 
-      //   ORDER BY gia \"<script type=\"text/javascript\">value</script>\"";
-      //   $query_pro = mysqli_query($mysqli, $sql_pro);
-      
-      // $myArray = array();
-      // while($row = $query_pro->fetch_assoc()) {
-      //     $myArray[] = $row;
-      // }
-      // render($myArray);
-      // ?>
     }
   </script>
 </head>
@@ -69,18 +44,17 @@
     $order = "ASC";
   }
 
+  // Truy vấn
   $sql_pro = "SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_dm=$id ORDER BY gia $order";
   $query_pro = mysqli_query($mysqli, $sql_pro);
-
-  // DEBUG
-  file_put_contents("./query.txt", $sql_pro . ": " . rand() . "-" . $id);
-  // DEBUG
   
+  // Chuyển kết quả truy vấn sql thành mảng
   $myArray = array();
   while ($row = $query_pro->fetch_assoc()) {
     $myArray[] = $row;
   }
 
+  // Trả về kết quả cho front-end
   // echo json_encode($myArray);
   ?>
 
@@ -93,6 +67,8 @@
   <ul class="container product_list">
     <?php
     $query_pro = mysqli_query($mysqli, $sql_pro);
+
+    // Hiển thị các mặt hàng với danh sách mặt hàng cho trước
     function render($query_pro_array)
     {
 
@@ -100,15 +76,6 @@
 
       foreach ($query_pro_array as $row_pro) {
         $count++;
-
-        // DEBUG
-        file_put_contents(
-          "./render.json",
-          json_encode($row_pro) . PHP_EOL,
-          FILE_APPEND
-        );
-        // DEBUG
-    
         // Nếu sản phẩm là sản phẩm đầu tiên của hàng thì bắt đầu một hàng mới
         if ($count % 3 == 1) {
           echo '<div class="row">';
@@ -138,6 +105,7 @@
         echo '</div>';
       }
     }
+
     render($myArray);
     ?>
   </ul>

@@ -15,7 +15,6 @@
 <body>
     <div class="wrapper">
         <?php
-        //tui dùng include để làm mấy này không à
             include("config/config.php");
             include("pages/header.php");
             include("pages/main.php");

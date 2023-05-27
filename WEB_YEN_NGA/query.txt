@@ -1,1 +1,0 @@
-SELECT * FROM tbl_sanpham WHERE tbl_sanpham.id_dm=1 ORDER BY gia ASC: 306548785-1
